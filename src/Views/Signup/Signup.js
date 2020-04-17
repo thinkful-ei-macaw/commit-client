@@ -2,7 +2,9 @@ import React from 'react'
 import './Signup.css'
 import Nav from '../../components/Nav/Nav'
 import ValidationError from '../../components/ValidationError/ValidationError'
+import AuthApiService from '../../services/auth-api-service;'
 import {Link} from 'react-router-dom'
+import TokenService from '../../services/token-service'
 
 class Signup extends React.Component {
 constructor(props) {
@@ -23,7 +25,12 @@ this.handleSubmit = this.handleSubmit.bind(this);
 handleSubmit = event => {
     console.log('Hi')
     event.preventDefault();
-    // const {name, password} = this.state;
+    this.setState({error:null})
+    const {name, password} = event.target
+    TokenService.saveAuthToken(
+        TokenService.makeBasicAuthToken(name.value, password.value) // makes token and saves token
+    )
+   
 }
 
 
@@ -56,7 +63,6 @@ validatePassword() {
     }
 }   
   render() {
-      console.log('anything')
     return(
       <div>
      <Nav/>
