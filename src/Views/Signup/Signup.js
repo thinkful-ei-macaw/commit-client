@@ -2,9 +2,9 @@ import React from 'react'
 import './Signup.css'
 import Nav from '../../components/Nav/Nav'
 import ValidationError from '../../components/ValidationError/ValidationError'
-import AuthApiService from '../../services/auth-api-service;'
-import {Link} from 'react-router-dom'
-import TokenService from '../../services/token-service'
+import AuthApiService from '../../services/auth-api-service'
+// import {Link} from 'react-router-dom'
+// import TokenService from '../../services/token-service'
 
 class Signup extends React.Component {
 constructor(props) {
@@ -26,21 +26,27 @@ handleSubmit = event => {
     console.log('Hi')
     event.preventDefault();
     this.setState({error:null})
-    const {name, password} = event.target
-    TokenService.saveAuthToken(
-        TokenService.makeBasicAuthToken(name.value, password.value) // makes token and saves token
-    )
+    
+    AuthApiService.postUser(this.state.name.value, this.state.password.value)
+    .then(user => {
+      debugger
+    })
+    .catch( (e) => {
+        alert('failed to sign up')
+        console.log(e)
+    })
    
+ 
 }
 
 
 updateName(name) {
     
     this.setState({name: {value: name, touched: true}})
+    
 }
 
 updatePassword(password) {
-    
     this.setState({password: {value: password, touched: true}})
 }
 
@@ -77,11 +83,11 @@ validatePassword() {
                 {this.state.name.touched && <ValidationError message={this.validateName()}/>}
                 <input onChange={e=>this.updatePassword(e.target.value)}  id="password" name="password" placeholder="password" type="password"/><br />
                 {this.state.password.touched && <ValidationError message={this.validatePassword()}/>}
-                <Link to={'/daily-focus'}>
+                {/* <Link to={'/daily-focus'}> */}
                 <div className="button">
                    <input value={'Get started'}type="submit"/>
                 </div>
-                </Link>
+                {/* </Link> */} }
                 <br />
             </div>
         </form>
