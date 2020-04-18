@@ -29,7 +29,7 @@ handleSubmit = event => {
     
     AuthApiService.postUser(this.state.name.value, this.state.password.value)
     .then(user => {
-      debugger
+      
     })
     .catch( (e) => {
         alert('failed to sign up')
