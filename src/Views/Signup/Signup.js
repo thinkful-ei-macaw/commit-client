@@ -3,7 +3,8 @@ import './Signup.css'
 import Nav from '../../components/Nav/Nav'
 import ValidationError from '../../components/ValidationError/ValidationError'
 import AuthApiService from '../../services/auth-api-service'
-// import {Link} from 'react-router-dom'
+import TokenService from '../../services/token-service'
+import {Link} from 'react-router-dom'
 // import TokenService from '../../services/token-service'
 
 class Signup extends React.Component {
@@ -19,24 +20,35 @@ constructor(props) {
             touched: false
         }
     }
-this.handleSubmit = this.handleSubmit.bind(this);
+this.handleSubmitJwtAuth = this.handleSubmitJwtAuth.bind(this);
 }
 
-handleSubmit = event => {
+static defaultProps = {
+    onLoginSucess: () => {}
+}
+
+state = {error: null}
+
+handleSubmitJwtAuth = event => {
     console.log('Hi')
     event.preventDefault();
     this.setState({error:null})
+    const { user_name , password} = event.target
     
-    AuthApiService.postUser(this.state.name.value, this.state.password.value)
-    .then(user => {
-      
+    AuthApiService.postLogin({
+        user_name: user_name.value,
+        password: password.value
+        })
+    .then((res)  => {
+      user_name.value = ''
+      password.value = ''
+      TokenService.saveAuthToken(res.authToken)
+      this.props.onLoginSucess()
     })
-    .catch( (e) => {
-        alert('failed to sign up')
-        console.log(e)
-    })
-   
- 
+    .catch( (res) => {
+      this.setState({error: res.error})
+      console.log(res)
+    }) 
 }
 
 
@@ -76,8 +88,8 @@ validatePassword() {
         <h1>Commit</h1>
     </div>
     <div className="container">
-        <form onSubmit={this.handleSubmit}>
-            <h2>Sign Up</h2>
+        <form onSubmit={this.handleSubmitJwtAuth}>
+            <h2>Login</h2>
             <div className="form-content">
                 <input onChange={e=>this.updateName(e.target.value)} id="user_name" name="user_name" placeholder="user name" type="text"/>
                 {this.state.name.touched && <ValidationError message={this.validateName()}/>}
@@ -87,7 +99,7 @@ validatePassword() {
                 <div className="button">
                    <input value={'Get started'}type="submit"/>
                 </div>
-                {/* </Link> */} }
+                {/* </Link> } */}
                 <br />
             </div>
         </form>
