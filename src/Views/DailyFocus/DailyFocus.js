@@ -6,9 +6,15 @@ import DailyFocusSession from '../../components/DailyFocusSession/DailyFocusSess
 import DailyBreaksSession from '../../components/DailyFocusBreaks/DailyFocusBreaks'
 import DailyFocusStreak from '../../components/DailyFocusStreak/DailyFocusStreak'
 import TodoList from '../../components/TodoList/TodoList'
+import TokenService from '../../services/token-service'
 
 
 export default class DailyFocus extends React.Component {
+
+handleLogoutClick = () => {
+  TokenService.clearAuthToken()
+}
+
   render() {
     return (
       <div>
