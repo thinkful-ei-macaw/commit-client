@@ -7,6 +7,7 @@ import DailyBreaksSession from '../../components/DailyFocusBreaks/DailyFocusBrea
 import DailyFocusStreak from '../../components/DailyFocusStreak/DailyFocusStreak'
 import TodoList from '../../components/TodoList/TodoList'
 import TokenService from '../../services/token-service'
+import {Link} from 'react-router-dom'
 
 
 export default class DailyFocus extends React.Component {
@@ -20,9 +21,13 @@ handleLogoutClick = () => {
       <div>
       <main>
         <Nav/>
+        
         <DailyFocusHeader/>
       <section className="streak-section">
         <DailyFocusSession/>
+        <Link to='/'>
+          <button type="button" onClick={this.handleLogoutClick}>Log out</button>
+        </Link>
         <DailyBreaksSession/>
         <DailyFocusStreak/>
       </section>
