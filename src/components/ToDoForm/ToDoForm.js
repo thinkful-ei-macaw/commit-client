@@ -13,7 +13,7 @@ handleChange = (e) => {
     })
 }
 handleSubmit = (e) => {
-  debugger
+  
   e.preventDefault() 
  
   const {
@@ -23,12 +23,15 @@ handleSubmit = (e) => {
 
   TaskAPIService.createTask(text.value, complete)
     .then((task) => {
-      debugger
+     
       this.props.onSubmit({ 
-        text: this.state.text,
+        name: this.state.text,
         complete: false,
         id: task.id
       })
+       this.setState({
+         text: ''
+       })
     })
 }
 

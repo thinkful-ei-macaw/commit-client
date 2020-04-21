@@ -43,7 +43,7 @@ const TaskApiService = {
         res.json()
       )
   },
-  updateTask(task_id, complete) {
+  updateTask(task_id, task) {
     return fetch(`${config.API_ENDPOINT}/tasks/${task_id}`, {
         method: 'PATCH',
         headers: {
@@ -51,14 +51,13 @@ const TaskApiService = {
           'authorization': `Bearer ${TokenService.getAuthToken()}`
         },
         body: JSON.stringify({
-          task_id,
-          complete
+          task
         }),
       })
       .then(res =>
         (!res.ok) ?
         res.json().then(e => Promise.reject(e)) :
-        res.json()
+        res
       )
   },
 
@@ -71,8 +70,8 @@ const TaskApiService = {
         }
       });
   },
-  deleteAllTasks(task_id) {
-    return fetch(`${config.API_ENDPOINT}/tasks/${task_id}`, {
+  deleteAllTasks() {
+    return fetch(`${config.API_ENDPOINT}/tasks`, {
         method: 'DELETE',
         headers: {
           'content-type': 'application/json',

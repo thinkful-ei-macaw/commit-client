@@ -14,37 +14,52 @@ export default class TodoList extends React.Component {
     streaks: 0
   }
 
+  componentDidMount() {
+    TaskApiService.getTasks()
+    .then(tasks => {
+      console.log(tasks)
+      this.setState({
+        todos: tasks
+      })
+    })
+  }
+
 addTodo = (todo) => {
-  debugger
+  
   this.setState({
   todos: [todo, ...this.state.todos] // adding todo to current state
   })
 }
 
-toggleComplete = (id) => {
-  let totalNotCompleted = 0
-  const todos = this.state.todos.map(todo => {
-      if(!todo.complete) {
+toggleComplete = (task) => {
+  TaskApiService.updateTask(task.id, task)
+  .then(()=> {
+    let totalNotCompleted = 0
+    const todos = this.state.todos.map(todo => {
+      if (!todo.complete) {
         totalNotCompleted++
       }
       // supposed to update
-      if (todo.id === id) {
+      if (todo.id === task.id) {
 
         return {
+
           ...todo, // keep  everything the same
           complete: !todo.complete // change the value
-       }
-      
+        }
+
       } else {
         return todo;
       }
     })
     totalNotCompleted = todos.filter(todo => !todo.complete).length
-  this.setState({
+    this.setState({
 
-    todos,
-    streaks: totalNotCompleted === 0 ? this.state.streaks + 1 : this.state.streaks
+      todos,
+      streaks: totalNotCompleted === 0 ? this.state.streaks + 1 : this.state.streaks
+    })
   })
+  
 }
 
 updateToDoToShow = (s) => {
@@ -63,12 +78,13 @@ handleDeleteTodo = (id) => {
    
 }
 
-removeComplete = (id) => {
-  TaskApiService.deleteAllTasks(id)
-  .then(task => )
-  this.setState({
-    todos: this.state.todos.filter(todo => !todo.complete)
-  })
+removeComplete = () => {
+  TaskApiService.deleteAllTasks()
+  .then(() => {
+    this.setState({
+          todos: this.state.todos.filter(todo => !todo.complete)
+    })}
+    )
 }
  
 render() {
@@ -87,7 +103,7 @@ render() {
       <ToDoForm onSubmit={this.addTodo}/>
       {todos.map(todo => (
       <ToDo key={todo.id} todo={todo} 
-      toggleComplete={() => this.toggleComplete(todo.id)}
+      toggleComplete={() => this.toggleComplete(todo)}
       onDelete={()=> this.handleDeleteTodo(todo.id)} />
       ))}
       <div>active todos: {this.state.todos.filter(todo => !todo.complete).length} </div>
