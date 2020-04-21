@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import TaskAPIService from '../../services/task-api-service'
 
 class ToDoForm extends Component {
 
@@ -11,26 +12,32 @@ handleChange = (e) => {
       [e.target.name]: e.target.value
     })
 }
-
 handleSubmit = (e) => {
-e.preventDefault() // removing form behavior 
-this.props.onSubmit({
-  text: this.state.text, 
-  complete: false,
-  id: Date.now()
-})
-this.setState({
-  text: ''
-})
-}
+  debugger
+  e.preventDefault() 
+ 
+  const {
+    text,
+    complete
+  } = e.target
 
+  TaskAPIService.createTask(text.value, complete)
+    .then((task) => {
+      debugger
+      this.props.onSubmit({ 
+        text: this.state.text,
+        complete: false,
+        id: task.id
+      })
+    })
+}
 
 render() {
 return (
   <div>
     <form onSubmit={this.handleSubmit}>
     <input required name="text" value={this.state.text} onChange={this.handleChange} placeholder="enter task"/>
-    <button onClick={this.handleSubmit}></button>
+    <button>Add task</button>
     </form>
     </div>
   )

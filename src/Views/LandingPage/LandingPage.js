@@ -25,7 +25,7 @@ constructor(props) {
                Elit enim Lorem pariatr pElit enim Lorem pariatr pElit enim Lorem pariatr p
             </p>
             <div className="button_container">
-             <Link to={'/get-started'}>
+             <Link to={'/login'}>
             <button>Get started</button>
              </Link>
             </div>

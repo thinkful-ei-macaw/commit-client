@@ -5,7 +5,7 @@ import Nav from '../../components/Nav/Nav'
 import AuthApiService from '../../services/auth-api-service'
 import TokenService from '../../services/token-service'
 import { Button, Input } from '../../components/Util/Utils'
-// import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 // import TokenService from '../../services/token-service'
 
 class LoginForm extends React.Component {
@@ -30,7 +30,7 @@ static defaultProps = {
 }
 
 handleSubmitJwtAuth = event => {
-    console.log('Hi')
+ 
     this.setState({error: null})
     event.preventDefault();
         const {
@@ -38,9 +38,6 @@ handleSubmitJwtAuth = event => {
             password
         } = event.target
      
-    console.log(event.target)
-   
- 
     AuthApiService.postLogin({
         user_name: user_name.value,
         password: password.value
@@ -87,7 +84,6 @@ handleSubmitJwtAuth = event => {
 // }   
 
 render() {
-      const {error} = this.state
     return(
       <div>
      <Nav/>
@@ -117,9 +113,11 @@ render() {
                 {/* <input onChange={e=>this.updatePassword(e.target.value)}  id="password" name="password" placeholder="password" type="password"/><br />
                 {this.state.password.touched && <ValidationError message={this.validatePassword()}/>} */}
                 {/* <Link to={'/daily-focus'}> */}
+                
                 <Button type='submit'>
                     Login
                 </Button>
+              
                 {/* <div className="button">
                    <input value={'Get started'}type="submit"/>
                 </div> */}

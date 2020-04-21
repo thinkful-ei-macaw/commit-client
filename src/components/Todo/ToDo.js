@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 export default class ToDo extends Component {
   
 onDelete =(e) => {
+  debugger
   e.stopPropagation()
   this.props.onDelete()
 }

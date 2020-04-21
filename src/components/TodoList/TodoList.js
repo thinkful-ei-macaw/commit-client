@@ -2,6 +2,7 @@ import React from 'react'
 import './ToDoList.css'
 import ToDoForm from '../ToDoForm/ToDoForm'
 import ToDo from '../Todo/ToDo'
+import TaskApiService from '../../services/task-api-service'
 
 
 export default class TodoList extends React.Component {
@@ -14,6 +15,7 @@ export default class TodoList extends React.Component {
   }
 
 addTodo = (todo) => {
+  debugger
   this.setState({
   todos: [todo, ...this.state.todos] // adding todo to current state
   })
@@ -52,24 +54,24 @@ updateToDoToShow = (s) => {
 }
 
 handleDeleteTodo = (id) => {
-  // console.log(id, this.state.todos.filter(todo => todo.id !== id))
-  console.log(this.state.todos)
   this.setState({
     todos: this.state.todos.filter(todo => todo.id !== id )
   }, () => {
-    console.log(this.state.todos)
+    
    })
-  
+   TaskApiService.deleteTask(id);
+   
 }
 
-removeComplete = () => {
+removeComplete = (id) => {
+  TaskApiService.deleteAllTasks(id)
+  .then(task => )
   this.setState({
     todos: this.state.todos.filter(todo => !todo.complete)
   })
 }
  
 render() {
-// console.log(this.state.todos)
   let todos = []
   if(this.state.todosToShow === 'all') {
     todos = this.state.todos;
@@ -78,9 +80,6 @@ render() {
   } else if (this.state.todosToShow === 'complete') {
     todos=this.state.todos.filter(todo => todo.complete)
   }
-
-  
-// console.log(todos)
 
   return (
     <div>
