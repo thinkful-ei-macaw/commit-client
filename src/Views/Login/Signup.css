@@ -16,7 +16,7 @@ a {
 }
 
 /* Form layout*/
-form {
+/* form {
   margin-top: 100px;
   border-radius: 8px;
   padding: 2em;
@@ -36,7 +36,7 @@ form input {
   padding: 16px;
   margin-bottom: 14px;
   width: 90%;
-}
+} */
 
 .button {
   font-weight: 600;

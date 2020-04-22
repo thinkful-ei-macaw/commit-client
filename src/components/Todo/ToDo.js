@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './Todo.css'
 
 export default class ToDo extends Component {
   
@@ -10,7 +11,8 @@ onDelete =(e) => {
 
   render() {
     return (
-      <div onClick={this.props.toggleComplete} style={{
+     
+      <div className="todo" onClick={this.props.toggleComplete} style={{
         textDecoration: this.props.todo.complete ? 'Line-through' : ''
       }}>
         {this.props.todo.name}

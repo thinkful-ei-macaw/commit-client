@@ -53,36 +53,6 @@ handleSubmitJwtAuth = event => {
     }) 
 }
 
-
-// updateName(name) {
-    
-//     this.setState({name: {value: name, touched: true}})
-    
-// }
-
-// updatePassword(password) {
-//     this.setState({password: {value: password, touched: true}})
-// }
-
-// validateName(){
-//     const name = this.state.name.value;
-//     if(name.length === 0) {
-//         return 'Name must be at least 3 characters long'
-//     } else if (name.length < 3) {
-//         return 'Name must be at least 3 characters long';
-//     }
-// }
-// validatePassword() {
-//     const password = this.state.password.value.trim();
-//     if (password.length === 0) {
-//         return 'Password is required '
-//     } else if (password.length < 6 || password.length > 72) {
-//          return 'Password must be between 6 and 72 characters'
-//     } else if (!password.match(/[0-9]/)) {
-//         return 'Password must contain at least one number';
-// //     }
-// }   
-
 render() {
     return(
       <div>

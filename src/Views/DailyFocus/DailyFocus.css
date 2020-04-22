@@ -1,64 +1,13 @@
-main {
-   display: flex;
-   flex-direction: column;
-   justify-content: flex;
-   height: 100vh;
- }
-
-  body {
-    background-color: #66CCff;
-
+body {
+    background-color: #f0f0ff;
   }
 
  
- ul {
-   display: -webkit-flex;
-   display: flex;
-   list-style: none;
- }
-
- ul li a {
-   color: black;
-   margin: 0px 10px;
-   padding: 10px;
-   border-radius: 5px;
- }
-
- .streak-section {
-   display: flex;
-   margin-top: 50px;
-   height: 100px;
-   flex-direction: row;
-   justify-content: center;
-   justify-content: space-evenly;
-   border: purple 3px dashed;
- }
- 
- .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-   margin-top: 100px;
-   width: 80%;
-   margin: 80px auto;
-   padding: 10px;
- }
-
- .txtb {
-   width: 100%;
-   border: none;
-   border-bottom: 2px solid black;
-   padding: 10px;
-   background: none;
-   outline: none;
- }
-
- h3 {
-   margin: 10px 0;
- }
 
  
- .comp .task {
-  
-   color: white;
- }
+
+
+
+
+
+

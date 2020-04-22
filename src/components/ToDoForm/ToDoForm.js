@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import TaskAPIService from '../../services/task-api-service'
+import './ToDoForm.css'
 
 class ToDoForm extends Component {
 
@@ -38,10 +39,19 @@ handleSubmit = (e) => {
 render() {
 return (
   <div>
-    <form onSubmit={this.handleSubmit}>
-    <input required name="text" value={this.state.text} onChange={this.handleChange} placeholder="enter task"/>
-    <button>Add task</button>
+    <div className="todoListContainter">
+    <div className="todoList">
+     <header>
+       <h1>Things to do</h1>
+        <form onSubmit={this.handleSubmit}>
+      <input className="form-control"required name="text" value={this.state.text} onChange={this.handleChange} placeholder="What needs to be done?"/>
+    <button className="taskButton">Add task</button>
     </form>
+     </header>
+     </div>
+   
+     
+    </div>
     </div>
   )
 

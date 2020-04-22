@@ -3,7 +3,7 @@ import TokenService from '../services/token-service'
 
 const TaskApiService = {
   getTasks() {
-    return fetch(`${config.API_ENDPOINT}/tasks`, {
+    return fetch(`${config.API_ENDPOINT}/api/tasks/`, {
         headers: {
           'authorization': `bearer ${TokenService.getAuthToken()}`
         },
@@ -13,6 +13,7 @@ const TaskApiService = {
         res.json().then(e => Promise.reject(e)) :
         res.json()
       )
+      
   },
   getTaskById(taskId) {
     return fetch(`${config.API_ENDPOINT}/tasks/${taskId}`, {
@@ -27,7 +28,7 @@ const TaskApiService = {
       )
   },
   createTask(name) {
-    return fetch(`${config.API_ENDPOINT}/tasks`, {
+    return fetch(`${config.API_ENDPOINT}/api/tasks`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -44,7 +45,7 @@ const TaskApiService = {
       )
   },
   updateTask(task_id, task) {
-    return fetch(`${config.API_ENDPOINT}/tasks/${task_id}`, {
+    return fetch(`${config.API_ENDPOINT}/api/tasks/${task_id}`, {
         method: 'PATCH',
         headers: {
           'content-type': 'application/json',
@@ -62,7 +63,7 @@ const TaskApiService = {
   },
 
   deleteTask(task_id) {
-    return fetch(`${config.API_ENDPOINT}/tasks/${task_id}`, {
+    return fetch(`${config.API_ENDPOINT}/api/tasks/${task_id}`, {
         method: 'DELETE',
         headers: {
           'content-type': 'application/json',

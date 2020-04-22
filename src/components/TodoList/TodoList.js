@@ -5,13 +5,14 @@ import ToDo from '../Todo/ToDo'
 import TaskApiService from '../../services/task-api-service'
 
 
+
 export default class TodoList extends React.Component {
 
   state = {
     todos: [],
     todosToShow:'all',
     toggleAllComplete: true,
-    streaks: 0
+    streaks: 0,
   }
 
   componentDidMount() {
@@ -64,7 +65,7 @@ toggleComplete = (task) => {
 
 updateToDoToShow = (s) => {
   this.setState({
-    todosToShow: s
+    todosToShow: s,
   })
 }
 
@@ -99,28 +100,26 @@ render() {
 
   return (
     <div>
-      {this.state.streaks}
       <ToDoForm onSubmit={this.addTodo}/>
-      {todos.map(todo => (
-      <ToDo key={todo.id} todo={todo} 
-      toggleComplete={() => this.toggleComplete(todo)}
-      onDelete={()=> this.handleDeleteTodo(todo.id)} />
-      ))}
-      <div>active todos: {this.state.todos.filter(todo => !todo.complete).length} </div>
+      <div className="toggleControlsContainer">
+        <div className="toggleButtons">
+       <div><span role='img' aria-label='fire'>🔥</span>{this.state.streaks}</div>
+      {/* <div>active todos: {this.state.todos.filter(todo => !todo.complete).length} </div> */}
       <div>
-        <button onClick={() => this.updateToDoToShow('all')}>all</button>
-         <button onClick={() => this.updateToDoToShow('active')}>active</button>
-          <button onClick={() => this.updateToDoToShow('complete')}>complete</button>
+        <button className="all-button"onClick={() => this.updateToDoToShow('all')} style={{backgroundColor: this.state.todosToShow === 'all' ? '#eab9c9' : undefined }}>All</button>
+         <button className="active" onClick={() => this.updateToDoToShow('active')} style={{backgroundColor: this.state.todosToShow === 'active' ? '#eab9c9' : undefined }}>Active</button>
+          <button className="complete"onClick={() => this.updateToDoToShow('complete')} style={{backgroundColor: this.state.todosToShow === 'complete' ? '#eab9c9' : undefined }}>Complete</button>
           </div>
           {this.state.todos.some(todo => todo.complete) ? (
             <div>
-              <button onClick={() => this.removeComplete()}>
-                Remove all
+              <button className="remove" onClick={() => this.removeComplete()}style={{backgroundColor: this.state.todosToShow === 'complete' ? '#eab9c9' : undefined }}>
+                Remove
               </button>
-            
            </div>
           ) : null}
-        <div>
+          </div>
+          </div>
+        {/* <div>
           <button onClick={() => this.setState({
             todos:this.state.todos.map(todo => ({
               ...todo,
@@ -130,7 +129,13 @@ render() {
 
            })}>
               Toggle all: {`${this.state.toggleAllComplete}`}</button>
-        </div>
+        </div> */}
+      {todos.map(todo => (
+      <ToDo key={todo.id} todo={todo} 
+      toggleComplete={() => this.toggleComplete(todo)}
+      onDelete={()=> this.handleDeleteTodo(todo.id)} />
+      ))}
+      
       </div>
   )
 } 

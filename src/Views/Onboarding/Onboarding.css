@@ -1,9 +1,18 @@
-.container {
+.onboarding-container {
   display: flex;
   align-items: center;
+  margin: 0 auto; 
   flex-direction: column;
   justify-content: space-between;
-  border: red dashed 2px;
+
+}
+
+.onboarding-container h1 {
+  padding: 10px;
+}
+
+.onboarding-container p {
+  font-size: 26px;
 }
 
 .image-container {
@@ -11,12 +20,13 @@
   justify-content: center;
   margin-top: 30px;
   margin-bottom: 30px;
-  width: 100px;
+  width: 70%;
   height: 100px;
 }
 
 p {
   font-size: 20px;
+  width: 70%;
   text-align: center;
   border: red dashed 2px;
 }

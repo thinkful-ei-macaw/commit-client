@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Nav from '../../components/Nav/Nav'
 
 import './Onboarding.css'
 
@@ -8,11 +7,10 @@ class Onboarding extends React.Component {
   render() {
     return (
       <div>
-      <Nav/>
       <main>
-        <div class="container">
+        <div class="onboarding-container">
              <h1>Habit Scheduler</h1>
-             <p> Let 's start your first two weeks of&nbsp;success!</p>
+             <p>A todo app, with a&nbsp;twist</p>
              <div class='image-container'>
                <img src="/Assets/online_calendar.png" alt="work" />
                  <p id="image-text-image"></p>
