@@ -17,7 +17,7 @@ export default class TodoList extends React.Component {
   componentDidMount() {
     TaskApiService.getTasks()
     .then(tasks => {
-      console.log(tasks)
+     
       this.setState({
         todos: tasks
       })

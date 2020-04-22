@@ -1,0 +1,16 @@
+{
+  "routes": [
+    {
+      "src": "/login",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/get-started",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/daily-focus",
+      "dest": "/index.html"
+    }
+  ]
+}
