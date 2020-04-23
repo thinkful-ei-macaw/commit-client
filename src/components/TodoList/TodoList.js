@@ -116,7 +116,7 @@ render() {
           <div>
           {this.state.todos.some(todo => todo.complete) ? (
             
-              <button className="remove" onClick={() => this.removeComplete()}style={{backgroundColor: this.state.todosToShow === 'complete' ? '#eab9c9' : undefined }}>
+              <button className="remove" onClick={() => this.removeComplete()}>
                 Remove
               </button>
            
