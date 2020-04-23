@@ -47,5 +47,14 @@ margin-bottom: 15px;
   transition: all 0.3s;
 }
 
+.scrollable {
+  flex: 1; 
+  overflow-y: auto;
 
+}
 
+.toDoList {
+display: flex;
+flex-direction: column;
+height: 100vh;
+}

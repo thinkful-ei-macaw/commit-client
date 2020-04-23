@@ -57,49 +57,28 @@ render() {
     return(
       <div>
      <Nav/>
-    <div className="sign-up-header">
-        <h1>Commit</h1>
-    </div>
-    <div className="container">
-        <form onSubmit={this.handleSubmitJwtAuth}>
-            <h2>Login</h2>
-            <div className="form-content">
-                <label htmlFor="Login_username">
-                    Username
-                </label>
-                <Input 
-                    required
-                    name="user_name"
-                    id="Login_username">
-                </Input>
-                <label htmlFor="Login_password">
-                    Password
-                </label>
-                <Input required 
-                name="password"
-                id="Login_username"></Input>
-                {/* <input onChange={e=>this.updateName(e.target.value)} id="user_name" name="user_name" placeholder="user name" type="text"/>
-                {this.state.name.touched && <ValidationError message={this.validateName()}/>} */}
-                {/* <input onChange={e=>this.updatePassword(e.target.value)}  id="password" name="password" placeholder="password" type="password"/><br />
-                {this.state.password.touched && <ValidationError message={this.validatePassword()}/>} */}
-                {/* <Link to={'/daily-focus'}> */}
-                
-                <Button type='submit'>
-                    Login
-                </Button>
-              
-                {/* <div className="button">
-                   <input value={'Get started'}type="submit"/>
-                </div> */}
-                {/* </Link> } */}
-                <br />
-            </div>
-        </form>
-    </div>
+    <div className="login-page">
+     
+  <div className="form">
+    <form onSubmit={this.handleSubmitJwtAuth}className="login-form">
+      <Input required name="user_name" id="Login_username" placeholder="username"></Input>
+      <Input required name="password" id="Login_username"placeholder="password" type="password"></Input>
+     <Button className='submit'>Login</Button>
+     <p class="message">Not registered? <a href="#">Create an account</a></p>
+    </form>
+  </div>
+</div>
+
 </div>
     )
   }
 }
+
+
+
+
+
+
 
 
 export default LoginForm

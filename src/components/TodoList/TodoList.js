@@ -3,6 +3,7 @@ import './ToDoList.css'
 import ToDoForm from '../ToDoForm/ToDoForm'
 import ToDo from '../Todo/ToDo'
 import TaskApiService from '../../services/task-api-service'
+import StreakService from '../../services/streaks-service'
 
 
 
@@ -12,7 +13,7 @@ export default class TodoList extends React.Component {
     todos: [],
     todosToShow:'all',
     toggleAllComplete: true,
-    streaks: 0,
+    streaks: StreakService.getStreaks(),
   }
 
   componentDidMount() {
@@ -59,8 +60,10 @@ toggleComplete = (task) => {
       todos,
       streaks: totalNotCompleted === 0 ? this.state.streaks + 1 : this.state.streaks
     })
+    if (totalNotCompleted === 0) {
+       StreakService.updateStreaks(this.state.streaks);
+    }
   })
-  
 }
 
 updateToDoToShow = (s) => {
@@ -99,7 +102,8 @@ render() {
   }
 
   return (
-    <div>
+    <div className="toDoList">
+     
       <ToDoForm onSubmit={this.addTodo}/>
       <div className="toggleControlsContainer">
         <div className="toggleButtons">
@@ -130,11 +134,13 @@ render() {
            })}>
               Toggle all: {`${this.state.toggleAllComplete}`}</button>
         </div> */}
+        <div className="scrollable">
       {todos.map(todo => (
       <ToDo key={todo.id} todo={todo} 
       toggleComplete={() => this.toggleComplete(todo)}
       onDelete={()=> this.handleDeleteTodo(todo.id)} />
       ))}
+      </div>
       
       </div>
   )
