@@ -25,6 +25,7 @@
 }
 
 .nav_items ul {
+text-decoration: none;
 list-style: none;
 margin: 0;
 padding: 0;
@@ -33,6 +34,8 @@ display: flex;
 
 .nav_items li {
   padding: 0 0.5rem;
+  text-decoration: none;
+  
 }
 .nav_items {
   color: white;
@@ -44,3 +47,6 @@ display: flex;
  color: black;
 }
 
+.nav_items a {
+text-decoration: none;
+}

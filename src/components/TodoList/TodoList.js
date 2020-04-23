@@ -19,7 +19,6 @@ export default class TodoList extends React.Component {
   componentDidMount() {
     TaskApiService.getTasks()
     .then(tasks => {
-     
       this.setState({
         todos: tasks
       })
@@ -109,18 +108,20 @@ render() {
         <div className="toggleButtons">
        <div><span role='img' aria-label='fire'>🔥</span>{this.state.streaks}</div>
       {/* <div>active todos: {this.state.todos.filter(todo => !todo.complete).length} </div> */}
-      <div>
+      <div className="main-controls">
         <button className="all-button"onClick={() => this.updateToDoToShow('all')} style={{backgroundColor: this.state.todosToShow === 'all' ? '#eab9c9' : undefined }}>All</button>
          <button className="active" onClick={() => this.updateToDoToShow('active')} style={{backgroundColor: this.state.todosToShow === 'active' ? '#eab9c9' : undefined }}>Active</button>
           <button className="complete"onClick={() => this.updateToDoToShow('complete')} style={{backgroundColor: this.state.todosToShow === 'complete' ? '#eab9c9' : undefined }}>Complete</button>
           </div>
+          <div>
           {this.state.todos.some(todo => todo.complete) ? (
-            <div>
+            
               <button className="remove" onClick={() => this.removeComplete()}style={{backgroundColor: this.state.todosToShow === 'complete' ? '#eab9c9' : undefined }}>
                 Remove
               </button>
-           </div>
+           
           ) : null}
+          </div>
           </div>
           </div>
         {/* <div>

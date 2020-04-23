@@ -5,6 +5,7 @@ import DailyFocus from '../Views/DailyFocus/DailyFocus';
 import PrivateRoute from '../components/Util/PrivateRoute'
 import LoginPage  from '../Views/Login/LoginPage'
 import Onboarding from '../Views/Onboarding/Onboarding'
+import './App.css'
 
 class App extends React.Component {
   
