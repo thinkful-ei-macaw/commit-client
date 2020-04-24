@@ -81,14 +81,14 @@ handleDeleteTodo = (id) => {
    
 }
 
-removeComplete = () => {
-  TaskApiService.deleteAllTasks()
-  .then(() => {
-    this.setState({
-          todos: this.state.todos.filter(todo => !todo.complete)
-    })}
-    )
-}
+// removeComplete = () => {
+//   TaskApiService.deleteAllTasks()
+//   .then(() => {
+//     this.setState({
+//           todos: this.state.todos.filter(todo => !todo.complete)
+//     })}
+//     )
+// }
  
 render() {
   let todos = []
@@ -113,15 +113,15 @@ render() {
          <button className="active" onClick={() => this.updateToDoToShow('active')} style={{backgroundColor: this.state.todosToShow === 'active' ? '#eab9c9' : undefined }}>Active</button>
           <button className="complete"onClick={() => this.updateToDoToShow('complete')} style={{backgroundColor: this.state.todosToShow === 'complete' ? '#eab9c9' : undefined }}>Complete</button>
           </div>
-          <div>
+          {/* <div>
           {this.state.todos.some(todo => todo.complete) ? (
             
               <button className="remove" onClick={() => this.removeComplete()}>
-                Remove
+                Remove all
               </button>
            
           ) : null}
-          </div>
+          </div> */}
           </div>
           </div>
         {/* <div>
