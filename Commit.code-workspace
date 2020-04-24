@@ -7,5 +7,10 @@
 			"path": "../commit-api"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"cSpell.words": [
+			"scrollable",
+			"todos"
+		]
+	}
 }
