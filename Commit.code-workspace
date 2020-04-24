@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../commit-api"
+		},
+		{
+			"path": "../../Downloads/app-images/images"
 		}
 	],
 	"settings": {

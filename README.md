@@ -16,4 +16,3 @@ Commit is a simple solution for building healthier coding habits. Designed for e
 
 ![screenshot](./repo-images/screenshot.png)
  
-
