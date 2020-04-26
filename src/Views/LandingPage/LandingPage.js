@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import CheckboxImage from '../../images/checkbox.svg';
 import MobileDevice from '../../images/mobile-device.svg';
 import TakeBreaks from '../../images/take-breaks.svg';
-import HappyFeeling from '../../images/happy-feeling.svg'
+import HappyFeeling from '../../images/happy-feeling.svg';
 
 class LandingPage extends React.Component {
 constructor(props) {

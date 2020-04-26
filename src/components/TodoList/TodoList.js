@@ -1,94 +1,95 @@
-import React from 'react'
-import './ToDoList.css'
-import ToDoForm from '../ToDoForm/ToDoForm'
-import ToDo from '../Todo/ToDo'
-import TaskApiService from '../../services/task-api-service'
-import StreakService from '../../services/streaks-service'
+import React from 'react';
+import './ToDoList.css';
+import ToDoForm from '../ToDoForm/ToDoForm';
+import ToDo from '../Todo/ToDo';
+import TaskApiService from '../../services/task-api-service';
+import StreakService from '../../services/streaks-service';
 
 
 
 export default class TodoList extends React.Component {
 
-  state = {
-    todos: [],
-    todosToShow:'all',
-    toggleAllComplete: true,
-    streaks: StreakService.getStreaks(),
-  }
-
-  componentDidMount() {
-    TaskApiService.getTasks()
-    .then(tasks => {
-      this.setState({
-        todos: tasks
-      })
-    })
-  }
-
-addTodo = (todo) => {
-  
-  this.setState({
-  todos: [todo, ...this.state.todos] // adding todo to current state
-  })
-}
-
-toggleComplete = (task) => {
-  TaskApiService.updateTask(task.id, task)
-  .then(()=> {
-    let totalNotCompleted = 0
-    const todos = this.state.todos.map(todo => {
-      if (!todo.complete) {
-        totalNotCompleted++
-      }
-      // supposed to update
-      if (todo.id === task.id) {
-
-        return {
-
-          ...todo, // keep  everything the same
-          complete: !todo.complete // change the value
-        }
-
-      } else {
-        return todo;
-      }
-    })
-    totalNotCompleted = todos.filter(todo => !todo.complete).length
-    this.setState({
-
-      todos,
-      streaks: totalNotCompleted === 0 ? this.state.streaks + 1 : this.state.streaks
-    })
-    if (totalNotCompleted === 0) {
-       StreakService.updateStreaks(this.state.streaks);
+    state = {
+      todos: [],
+      todosToShow: 'all',
+      toggleAllComplete: true,
+      streaks: StreakService.getStreaks(),
     }
-  })
-}
 
-updateToDoToShow = (s) => {
-  this.setState({
-    todosToShow: s,
-  })
-}
+    /** Call getTasks before updating state  */
 
-handleDeleteTodo = (id) => {
-  this.setState({
-    todos: this.state.todos.filter(todo => todo.id !== id )
-  }, () => {
-    
-   })
-   TaskApiService.deleteTask(id);
-   
-}
+    componentDidMount() {
+      TaskApiService.getTasks()
+        .then(tasks => {
+          this.setState({
+            todos: tasks
+          })
+        })
+    }
 
-// removeComplete = () => {
-//   TaskApiService.deleteAllTasks()
-//   .then(() => {
-//     this.setState({
-//           todos: this.state.todos.filter(todo => !todo.complete)
-//     })}
-//     )
-// }
+    addTodo = (todo) => {
+
+      this.setState({
+        todos: [todo, ...this.state.todos] // adding a new todo to current state
+      })
+    }
+
+    toggleComplete = (task) => {
+      TaskApiService.updateTask(task.id, task)
+        .then(() => {
+          let totalNotCompleted = 0
+          const todos = this.state.todos.map(todo => {
+            if (!todo.complete) {
+              totalNotCompleted++
+            }
+            // supposed to update
+            if (todo.id === task.id) {
+
+              return {
+
+                ...todo, // keep  everything the same
+                complete: !todo.complete // change the value
+              }
+
+            } else {
+              return todo;
+            }
+          })
+
+          totalNotCompleted = todos.filter(todo => !todo.complete).length
+          this.setState({
+
+            todos,
+            streaks: totalNotCompleted === 0 ? this.state.streaks + 1 : this.state.streaks
+          })
+          if (totalNotCompleted === 0) {
+            StreakService.updateStreaks(this.state.streaks);
+          }
+        })
+    }
+
+    /** Handles which which toggle view to display to the user */
+
+    updateToDoToShow = (s) => {
+      this.setState({
+        todosToShow: s,
+      })
+    }
+
+    /** Handles deleting a todo. deleteTask calls a DELETE request
+     *  within the TaskAPIService.
+     */
+
+
+    handleDeleteTodo = (id) => {
+      this.setState({
+        todos: this.state.todos.filter(todo => todo.id !== id)
+      }, () => {
+
+      })
+      TaskApiService.deleteTask(id);
+
+    }
  
 render() {
   let todos = []

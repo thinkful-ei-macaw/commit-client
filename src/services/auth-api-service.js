@@ -1,9 +1,13 @@
 import config from '../config';
 
+/**
+ * Endpoint responsible for authorizing an existing user
+ */
+
 const AuthApiService = {
   postLogin(credentials) {
-   return fetch(`${config.API_ENDPOINT}/auth/login`, {
-      
+    return fetch(`${config.API_ENDPOINT}/auth/login`, {
+
         method: 'POST',
         headers: {
           'content-type': 'application/json',

@@ -9,7 +9,7 @@ const TokenService = {
       window.localStorage.setItem(config.TOKEN_KEY, token) // accepts token var and stores it in local storage under TOKEN KEY
     },
    getAuthToken() {
-   return window.localStorage.getItem(config.TOKEN_KEY)
+   return window.localStorage.getItem(config.TOKEN_KEY) // gets Auth token. Is called when creating, updating, getting, or deleteing a task. 
      },
    clearAuthToken() {
        console.info('clearing the auth token')
@@ -21,4 +21,4 @@ const TokenService = {
 
 }
 
-export default TokenService
+export default TokenService;

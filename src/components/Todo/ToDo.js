@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import './Todo.css'
+import React, { Component } from 'react';
+import './Todo.css';
 
 export default class ToDo extends Component {
   

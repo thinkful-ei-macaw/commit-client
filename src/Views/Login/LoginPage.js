@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import LoginForm from './LoginForm'
-import { Section } from '../../components/Util/Utils'
+import React, { Component } from 'react';
+import LoginForm from './LoginForm';
+import { Section } from '../../components/Util/Utils';
 
 export default class LoginPage extends Component {
     static defaultProps = {

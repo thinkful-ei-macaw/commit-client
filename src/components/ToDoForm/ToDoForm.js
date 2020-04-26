@@ -1,42 +1,57 @@
-import React, { Component } from 'react'
-import TaskAPIService from '../../services/task-api-service'
-import './ToDoForm.css'
+import React, { Component } from 'react';
+import TaskAPIService from '../../services/task-api-service';
+import './ToDoForm.css';
+
 
 class ToDoForm extends Component {
 
-state = {
-  text: ''
-}
+  state = {
+    text: ''
+  }
 
-handleChange = (e) => {
+  handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     })
-}
-handleSubmit = (e) => {
-  
-  e.preventDefault() 
- 
-  const {
-    text,
-    complete
-  } = e.target
+  }
+  handleSubmit = (e) => {
 
-  TaskAPIService.createTask(text.value, complete)
-    .then((task) => {
-     
-      this.props.onSubmit({ 
-        name: this.state.text,
-        complete: false,
-        id: task.id
+    e.preventDefault()
+
+
+    const {
+      text,
+      complete
+    } = e.target
+
+
+    /** We pass the forms values within the createTask function
+     *  which makes a POST request within the Task API Service. 
+     *  onSubmit is a prop passed from TodoList, which calls addTodo
+     *  to update state. 
+     */
+
+
+    TaskAPIService.createTask(text.value, complete)
+      .then((task) => {
+
+        this.props.onSubmit({
+          name: this.state.text,
+          complete: false,
+          id: task.id
+        })
+        this.setState({
+          text: ''
+        })
       })
-       this.setState({
-         text: ''
-       })
-    })
-}
+  }
 
-render() {
+render() 
+
+/**  Component renders the form input and button   */
+
+
+{
 return (
   <div>
     <div className="todoListContainter">
@@ -60,4 +75,4 @@ return (
   
 }
 
-export default ToDoForm
+export default ToDoForm;

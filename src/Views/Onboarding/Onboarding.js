@@ -1,6 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import OnboardingImage from '../../images/onboarding.svg'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import OnboardingImage from '../../images/onboarding.svg';
 
 import './Onboarding.css'
 
@@ -27,5 +27,5 @@ class Onboarding extends React.Component {
   }
 }
 
-export default Onboarding 
+export default Onboarding;
 

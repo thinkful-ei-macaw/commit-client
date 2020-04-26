@@ -1,4 +1,4 @@
-import config from '../config';
+/** Service objects responsible for getting and updating streak count to local storage */
 
 const StreaksService = {
   updateStreaks(streakCount) {
@@ -6,7 +6,7 @@ const StreaksService = {
   },
 
   getStreaks() {
-   return parseInt(window.localStorage.getItem('streaks') || 0);
+    return parseInt(window.localStorage.getItem('streaks') || 0);
   }
 }
 

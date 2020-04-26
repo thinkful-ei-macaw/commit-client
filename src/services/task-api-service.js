@@ -1,5 +1,8 @@
 import config from '../config';
-import TokenService from '../services/token-service'
+import TokenService from '../services/token-service';
+
+/** GET request to get all tasks
+ */
 
 const TaskApiService = {
   getTasks() {
@@ -13,8 +16,12 @@ const TaskApiService = {
         res.json().then(e => Promise.reject(e)) :
         res.json()
       )
-      
+
   },
+
+  /** GET request to get a task by it's ID
+   */
+
   getTaskById(taskId) {
     return fetch(`${config.API_ENDPOINT}/tasks/${taskId}`, {
         headers: {
@@ -27,6 +34,10 @@ const TaskApiService = {
         res.json()
       )
   },
+
+  /** POST request to create a task. 
+   */
+
   createTask(name) {
     return fetch(`${config.API_ENDPOINT}/tasks`, {
         method: 'POST',
@@ -44,6 +55,9 @@ const TaskApiService = {
         res.json()
       )
   },
+
+  /** PATCH request for a task that gets marked complete */
+
   updateTask(task_id, task) {
     return fetch(`${config.API_ENDPOINT}/tasks/${task_id}`, {
         method: 'PATCH',
@@ -62,24 +76,30 @@ const TaskApiService = {
       )
   },
 
+    /** DELETE request for a task that gets deleted */
+
+
   deleteTask(task_id) {
     return fetch(`${config.API_ENDPOINT}/tasks/${task_id}`, {
-        method: 'DELETE',
-        headers: {
-          'content-type': 'application/json',
-          'authorization': `Bearer ${TokenService.getAuthToken()}`
-        }
-      });
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `Bearer ${TokenService.getAuthToken()}`
+      }
+    });
   },
+
+   /** DELETE request to delete all tasks */
+
   deleteAllTasks() {
     return fetch(`${config.API_ENDPOINT}/tasks`, {
-        method: 'DELETE',
-        headers: {
-          'content-type': 'application/json',
-          'authorization': `Bearer ${TokenService.getAuthToken()}`
-        },
-      })
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `Bearer ${TokenService.getAuthToken()}`
+      },
+    })
   }
 }
 
-export default TaskApiService
+export default TaskApiService;
