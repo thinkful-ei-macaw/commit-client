@@ -9,9 +9,14 @@ onDelete =(e) => {
   this.props.onDelete()
 }
 
-  render() {
+  render() 
+  
+  /**This renders a new task component*/  
+
+  {
     return (
     
+   
       <div className="todo" onClick={this.props.toggleComplete} style={{
         textDecoration: this.props.todo.complete ? 'Line-through' : ''
       }}>

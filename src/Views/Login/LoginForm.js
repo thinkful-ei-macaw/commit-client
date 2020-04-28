@@ -66,11 +66,11 @@ render() {
       <div>
      <Nav/>
     <div className="login-page">
-     
+  <div className = "form-header"> Login Credentials: Username: Jordan, Password: 2544252 </div>
   <div className="form">
     <form onSubmit={this.handleSubmitJwtAuth}className="login-form">
       <Input required name="user_name" id="Login_username" placeholder="username"></Input>
-      <Input required name="password" id="Login_username"placeholder="password" type="password"></Input>
+      <Input required name="password" id="Login_password"placeholder="password" type="password"></Input>
      <Button className='submit'>Login</Button>
     </form>
   </div>

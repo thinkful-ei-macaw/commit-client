@@ -11,10 +11,6 @@ const TokenService = {
    getAuthToken() {
    return window.localStorage.getItem(config.TOKEN_KEY) // gets Auth token. Is called when creating, updating, getting, or deleteing a task. 
      },
-   clearAuthToken() {
-       console.info('clearing the auth token')
-       window.localStorage.removeItem(config.TOKEN_KEY)
-     },
      hasAuthToken() {
        return !!TokenService.getAuthToken()
      },

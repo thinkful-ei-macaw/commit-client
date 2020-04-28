@@ -21,6 +21,12 @@
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
+.form-header {
+display: flex;
+text-align: center;
+flex-direction: column;
+}
+
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
