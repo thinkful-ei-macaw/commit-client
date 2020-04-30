@@ -54,7 +54,7 @@ render()
 {
 return (
   <div>
-    <div className="todoListContainter">
+    <div className="todoListContainer">
     <div className="todoList">
      <header>
        <h1>Things to do</h1>
