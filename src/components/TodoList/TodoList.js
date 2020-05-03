@@ -39,11 +39,9 @@ export default class TodoList extends React.Component {
            
             todos: tasks.sort(compare)
           })
-          return StreakService.getStreaks()
-          
+          return StreaksService.updateStreaks()
         })
     }
-
 
 
     addTodo = (todo) => {
