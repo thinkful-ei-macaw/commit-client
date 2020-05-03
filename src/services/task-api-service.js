@@ -76,6 +76,27 @@ const TaskApiService = {
       )
   },
 
+
+/**Patch Request for updating a streak */
+
+  updateStreak(streak) {
+    return fetch(`${config.API_ENDPOINT}/users/all`, {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': `Bearer ${TokenService.getAuthToken()}`
+        },
+        body: JSON.stringify({
+          streak
+        }),
+      })
+      .then(res =>
+        (!res.ok) ?
+        res.json().then(e => Promise.reject(e)) :
+        res
+      )
+  },
+
     /** DELETE request for a task that gets deleted */
 
 

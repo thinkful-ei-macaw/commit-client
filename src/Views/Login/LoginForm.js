@@ -71,6 +71,7 @@ render() {
     <form onSubmit={this.handleSubmitJwtAuth}className="login-form">
       <Input required name="user_name" id="Login_username" placeholder="username"></Input>
       <Input required name="password" id="Login_password"placeholder="password" type="password"></Input>
+      <p>{this.state.error}</p>
      <Button className='submit'>Login</Button>
     </form>
   </div>

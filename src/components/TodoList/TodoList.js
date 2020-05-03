@@ -4,8 +4,21 @@ import ToDoForm from '../ToDoForm/ToDoForm';
 import ToDo from '../Todo/ToDo';
 import TaskApiService from '../../services/task-api-service';
 import StreakService from '../../services/streaks-service';
+import StreaksService from '../../services/streaks-service';
 
+function compare(a, b) {
+  // Use toUpperCase() to ignore character casing
+  const nameA = a.date_created
+  const nameB = b.date_created
 
+  let comparison = 0;
+  if (nameA > nameB) {
+    comparison = 1;
+  } else if (nameA < nameB) {
+    comparison = -1;
+  }
+  return comparison;
+}
 
 export default class TodoList extends React.Component {
 
@@ -13,7 +26,7 @@ export default class TodoList extends React.Component {
       todos: [],
       todosToShow: 'all',
       toggleAllComplete: true,
-      streaks: StreakService.getStreaks(),
+      streaks: 0
     }
 
     /** Call getTasks before updating state  */
@@ -21,50 +34,66 @@ export default class TodoList extends React.Component {
     componentDidMount() {
       TaskApiService.getTasks()
         .then(tasks => {
+         
           this.setState({
-            todos: tasks
+           
+            todos: tasks.sort(compare)
           })
+          return StreakService.getStreaks()
+          
         })
     }
+
+
 
     addTodo = (todo) => {
 
       this.setState({
-        todos: [todo, ...this.state.todos] // adding a new todo to current state
+        todos: [todo, ...this.state.todos].sort(compare) // adding a new todo to current state
       })
     }
 
     toggleComplete = (task) => {
+      task.complete = !task.complete
       TaskApiService.updateTask(task.id, task)
         .then(() => {
-          let totalNotCompleted = 0
+          let total = 0 
           const todos = this.state.todos.map(todo => {
-            if (!todo.complete) {
-              totalNotCompleted++
-            }
+          
+          
+            
             // supposed to update
             if (todo.id === task.id) {
-
-              return {
-
-                ...todo, // keep  everything the same
-                complete: !todo.complete // change the value
-              }
-
-            } else {
-              return todo;
+              todo.complete = task.complete
+              
             }
-          })
 
-          totalNotCompleted = todos.filter(todo => !todo.complete).length
-          this.setState({
+             if (todo.complete) {
+               total++
+             }
+              return todo
 
-            todos,
-            streaks: totalNotCompleted === 0 ? this.state.streaks + 1 : this.state.streaks
           })
-          if (totalNotCompleted === 0) {
-            StreakService.updateStreaks(this.state.streaks);
+          if (todos.length == total) {
+            this.handleUpdateStreaks(this.state.streaks + 1)
+            this.setState({
+              streaks: this.state.streaks + 1,
+              todos
+            })
+          } else if (todos.length - 1 == total && !task.complete) {
+            this.handleUpdateStreaks(this.state.streaks - 1)
+             this.setState({
+                streaks: this.state.streaks - 1, 
+                todos
+              })
+          } else  {
+            this.setState({
+              todos
+            })
           }
+
+
+    
         })
     }
 
@@ -88,8 +117,17 @@ export default class TodoList extends React.Component {
 
       })
       TaskApiService.deleteTask(id);
-
     }
+
+    handleUpdateStreaks = (count) => {
+      TaskApiService.updateStreak(count) 
+      .then (() => {
+        this.setState({
+          streaks: count
+        })
+      })
+    }
+
  
 render() {
   let todos = []
@@ -101,13 +139,14 @@ render() {
     todos=this.state.todos.filter(todo => todo.complete)
   }
 
+
   return (
     <div className="toDoList">
      
       <ToDoForm onSubmit={this.addTodo}/>
       <div className="toggleControlsContainer">
         <div className="toggleButtons">
-       <div><span role='img' aria-label='fire'>🔥</span>{this.state.streaks}</div>
+       <div>{StreaksService.getEmoji(this.state.streaks)}{this.state.streaks}</div>
       <div className="main-controls">
         <button className="all-button"onClick={() => this.updateToDoToShow('all')} style={{backgroundColor: this.state.todosToShow === 'all' ? '#eab9c9' : undefined }}>All</button>
          <button className="active" onClick={() => this.updateToDoToShow('active')} style={{backgroundColor: this.state.todosToShow === 'active' ? '#eab9c9' : undefined }}>Active</button>

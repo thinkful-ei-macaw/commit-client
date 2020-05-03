@@ -9,10 +9,10 @@ class Onboarding extends React.Component {
     return (
       <div className="onboarding-parent-container">
       <main>
-        <div class="onboarding-container">
+        <div className="onboarding-container">
              <h1>Habit Scheduler</h1>
              <p>A todo app, with a&nbsp;twist. Get rewarded by completing coding sessions and by taking breaks.</p>
-             <div class='image-container'>
+             <div className='image-container'>
                <img src={OnboardingImage} alt="work" />
              </div>
            <div className="button-start-container">

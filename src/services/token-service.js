@@ -14,7 +14,9 @@ const TokenService = {
      hasAuthToken() {
        return !!TokenService.getAuthToken()
      },
-
+      clearAuthToken() {
+        window.localStorage.removeItem(config.TOKEN_KEY)
+      },
 }
 
 export default TokenService;

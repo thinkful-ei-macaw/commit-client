@@ -43,18 +43,7 @@ constructor(props) {
             </div>
             </div>
             </div>
-            
-            <div className="features_section">
-            <h1>Keep track of your breaks&nbsp;</h1>
-            <p>Get reminded to take breaks after completing coding sessions. Taking breaks can boost productivity, spark creative ideas, and retain information.
-            </p>
-            <div className="image_container">
-              <div>
-                <img src={TakeBreaks} alt="woman taking a break"></img>
-              </div>
-            </div>
-            </div>
-            <div className="features_section">
+              <div className="features_section">
             <h1>Stay motivated with&nbsp;streaks</h1>
             <p>Reward yourself with motivating streaks and check off tasks to level up your emoji!
             </p>
@@ -64,6 +53,18 @@ constructor(props) {
               </div>
             </div>
             </div>
+            
+            <div className="features_section">
+            <h1>Keep track of your breaks&nbsp;</h1>
+            <p>Get reminded to take breaks after completing coding sessions. Taking breaks can boost productivity, spark creative ideas, and retain information (coming soon!).
+            </p>
+            <div className="image_container">
+              <div>
+                <img src={TakeBreaks} alt="woman taking a break"></img>
+              </div>
+            </div>
+            </div>
+          
            <Footer/>
          </section>
        </main>
