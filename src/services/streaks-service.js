@@ -1,13 +1,41 @@
 /** Service objects responsible for getting and updating streak count to local storage */
 import React from 'react'
+import config from '../config';
+import TokenService from '../services/token-service';
+
+
 const StreaksService = {
-  updateStreaks(streakCount) {
-     window.localStorage.setItem('streaks', streakCount) // accepts token var and stores it in local storage under TOKEN KEY
+   updateStreak(streak) {
+     return fetch(`${config.API_ENDPOINT}/streak`, {
+         method: 'PATCH',
+         headers: {
+           'content-type': 'application/json',
+           'authorization': `Bearer ${TokenService.getAuthToken()}`
+         },
+         body: JSON.stringify({
+           streak
+         }),
+       })
+       .then(res =>
+         (!res.ok) ?
+         res.json().then(e => Promise.reject(e)) :
+         res
+       )
    },
 
-   getStreaks() {
-     return parseInt(window.localStorage.getItem('streaks') || 0);
-   }, 
+
+   getStreak() {
+     return fetch(`${config.API_ENDPOINT}/streak`, {
+         headers: {
+           'authorization': `bearer ${TokenService.getAuthToken()}`
+         },
+       })
+       .then(res =>
+         (!res.ok) ?
+         res.json().then(e => Promise.reject(e)) :
+         res.json()
+       )
+   },
   getEmoji(streak) {
     if (streak >= 0 && streak < 2) {
       return (
@@ -19,15 +47,15 @@ const StreaksService = {
       )
     } else if (streak >= 5 && streak < 8) {
       return (
-      <span role='img' aria-label='suprised-face'>🤩</span>
+      <span role='img' aria-label='surprised-face'>🤩</span>
       )
     } else {
       return (
          <span role='img' aria-label='fire'>🔥</span>
       )
     }
-
-  }
+  }, 
+  
 }
 
 export default StreaksService;

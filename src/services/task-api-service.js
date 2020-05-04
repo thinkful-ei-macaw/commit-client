@@ -16,8 +16,8 @@ const TaskApiService = {
         res.json().then(e => Promise.reject(e)) :
         res.json()
       )
-
   },
+
 
   /** GET request to get a task by it's ID
    */
@@ -96,6 +96,8 @@ const TaskApiService = {
         res
       )
   },
+
+  /**Fetch requests to get streaks */
 
     /** DELETE request for a task that gets deleted */
 

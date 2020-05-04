@@ -39,10 +39,15 @@ export default class TodoList extends React.Component {
            
             todos: tasks.sort(compare)
           })
-          return StreaksService.updateStreaks()
+        })
+        StreakService.getStreak()
+        .then(res => { 
+          this.setState({
+            streaks: res.streak
+          })
         })
     }
-
+   
 
     addTodo = (todo) => {
 
@@ -57,8 +62,7 @@ export default class TodoList extends React.Component {
         .then(() => {
           let total = 0 
           const todos = this.state.todos.map(todo => {
-          
-          
+           
             
             // supposed to update
             if (todo.id === task.id) {
@@ -72,13 +76,13 @@ export default class TodoList extends React.Component {
               return todo
 
           })
-          if (todos.length == total) {
+          if (todos.length === total) {
             this.handleUpdateStreaks(this.state.streaks + 1)
             this.setState({
               streaks: this.state.streaks + 1,
               todos
             })
-          } else if (todos.length - 1 == total && !task.complete) {
+          } else if (todos.length - 1 === total && !task.complete) {
             this.handleUpdateStreaks(this.state.streaks - 1)
              this.setState({
                 streaks: this.state.streaks - 1, 
@@ -118,7 +122,7 @@ export default class TodoList extends React.Component {
     }
 
     handleUpdateStreaks = (count) => {
-      TaskApiService.updateStreak(count) 
+      StreakService.updateStreak(count) 
       .then (() => {
         this.setState({
           streaks: count
